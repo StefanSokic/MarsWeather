@@ -3,6 +3,7 @@
 <head>
 	<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
 	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 	<title>Mars Live Weather</title>
 	<style type="text/css">
 	body {
@@ -25,9 +26,19 @@
 		letter-spacing: -1px;
 		margin-top: 7%;
 	}
+	div.mars {
+		display: none;
+	}
 	</style>
+	<script type="text/javascript">
+		$(document).ready(function(){
+        $("div.mars").fadeIn(5000).removeClass('mars');
+		});
+	</script>
 </head>
 <body>
-  <h1 id="mars">It's -20&deg;C on Mars</h1>
+  <div class="mars">
+  <h1>It's -20&deg;C on Mars</h1>
+  </div>
 </body>
 </html>
