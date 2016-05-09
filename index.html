@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+
+<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
+        <!--jQuery, linked from a CDN-->
+   <script src="scripts.js"></script>
+   <script type="text/javascript" src="http://use.typekit.com/oya4cmx.js"></script>
+   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
+
+
 	<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
 	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
@@ -12,7 +20,6 @@
       	-moz-background-size: cover;
       	-o-background-size: cover;
       	background-size: cover;
-		color: #EEEEEE;
 		text-align: center;
 	}
 	img {
@@ -29,6 +36,9 @@
 	div.mars {
 		display: none;
 	}
+	h1 {
+		color: #EEEEEE;
+	}
 	</style>
 
 	<script type="text/javascript">
@@ -41,16 +51,32 @@
 <body>
   <div class="mars">
   <h1>It's -___&deg;C on Mars</h1>
-
-  <h2>ay
   <script type="text/javascript">
   //testing pulling data from MAAS api
   		$(document).ready(function(){
         jquery.get('http://marsweather.ingenology.com/v1/latest/')
 		});	
   </script>
-  </h2>
   
+  </div>
+  <div class="button">
+
+  <button id="button">Click for data</button>
+  <script type="text/javascript" src="http://marsweather.ingenology.com/v1/latest/"></script>
+  <script type="text/javascript">
+  	$(document).ready(function() {
+
+    $("#button").on("click", function(){
+
+      $.getJSON("http://marsweather.ingenology.com/v1/latest/", function(json) {
+        $(".message").html(JSON.stringify(json));
+      });
+      
+    });
+
+  });
+  </script>
+  <h3 class="message">Click the button to insert data</h3>
   </div>
 </body>
 </html>
