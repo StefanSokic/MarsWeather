@@ -1,82 +1,43 @@
 <!DOCTYPE html>
 <html>
 <head>
-
-<script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.2.min.js"></script>
-        <!--jQuery, linked from a CDN-->
-   <script src="scripts.js"></script>
-   <script type="text/javascript" src="http://use.typekit.com/oya4cmx.js"></script>
-   <script type="text/javascript">try{Typekit.load();}catch(e){}</script>
-
-
 	<link rel="stylesheet" href="http://s3.amazonaws.com/codecademy-content/courses/ltp/css/bootstrap.css">
-	<link href='https://fonts.googleapis.com/css?family=Lato' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Play' rel='stylesheet' type='text/css'>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+	<!--Adjust for mobile-->
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 	<title>Mars Live Weather</title>
-	<style type="text/css">
-	body {
-		background-image: url('https://d13yacurqjgara.cloudfront.net/users/914927/screenshots/2454500/d_astro1_3.gif');
-      	-webkit-background-size: cover;
-      	-moz-background-size: cover;
-      	-o-background-size: cover;
-      	background-size: cover;
-		text-align: center;
-	}
-	img {
-		margin-top: 3%;
-		max-width: 400px;
-	}
-	h1 {
-		font-family: 'Lato', sans-serif;
-		font-size: 125px;
-		font-weight: bold;
-		letter-spacing: -1px;
-		margin-top: 7%;
-	}
-	div.mars {
-		display: none;
-	}
-	h1 {
-		color: #EEEEEE;
-	}
-	</style>
-
-	<script type="text/javascript">
-		$(document).ready(function(){
-        $("div.mars").fadeIn(5000).removeClass('mars');
-		});	
-	</script>
+	<link rel="stylesheet" href="css/style.css">
 
 </head>
 <body>
-  <div class="mars">
-  <h1>It's -___&deg;C on Mars</h1>
+  <div class="container mars">
+  <h1>It's <span id="fill"></span>&deg;C on Mars</h1>
+
   <script type="text/javascript">
-  //testing pulling data from MAAS api
-  		$(document).ready(function(){
-        jquery.get('http://marsweather.ingenology.com/v1/latest/')
-		});	
+  	$(document).ready(function(){
+  		$.ajax({
+		url: 'http://marsweather.ingenology.com/v1/latest' ,
+		data: {
+			format: 'jsonp'
+		},
+		dataType: 'jsonp',
+		success: function(data) {
+			var $date = data.report.terrestrial_date;
+			var $temperature = {
+				"max_celsius": data.report.max_temp,
+				"max_fahrenheit": data.report.max_temp_fahrenheit,
+				"min_celsius": data.report.min_temp,
+				"min_fahrenheit": data.report.min_temp_fahrenheit
+			};
+			var average = ($temperature.min_celsius + $temperature.max_celsius) / 2;
+			$('#fill').html(average);
+		}
+  		});
+  		$(".mars").fadeIn(2000);
+  	});
   </script>
-  
-  </div>
-  <div class="button">
 
-  <button id="button">Click for data</button>
-  <script type="text/javascript" src="http://marsweather.ingenology.com/v1/latest/"></script>
-  <script type="text/javascript">
-  	$(document).ready(function() {
-
-    $("#button").on("click", function(){
-
-      $.getJSON("http://marsweather.ingenology.com/v1/latest/", function(json) {
-        $(".message").html(JSON.stringify(json));
-      });
-      
-    });
-
-  });
-  </script>
-  <h3 class="message">Click the button to insert data</h3>
   </div>
 </body>
 </html>
