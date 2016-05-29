@@ -3,16 +3,18 @@ body {
       	-webkit-background-size: cover;
       	-moz-background-size: cover;
       	-o-background-size: cover;
-      	background-size: cover;
+      	background: cover;
 		color: #fff;
 		text-align: center;
 		font-family: 'Play', sans-serif;
 		font-size: 100px;
 		margin-top: 7%;
+		height: 100vh;
+		overflow: hidden;
 	}
 	h1 {
 		font-family: 'Play', sans-serif;
-		font-size: 100px;
+		font-size: 80px;
 		margin-top: 7%;
 	}
 	.mars {
